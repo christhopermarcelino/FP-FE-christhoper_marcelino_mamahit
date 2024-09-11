@@ -6,3 +6,11 @@
 .card:hover .card-footer {
   font-weight: 700 !important;
 }
+
+div.overlay {
+  opacity: 15%;
+}
+
+.card:hover div.overlay {
+  opacity: 0%;
+}
