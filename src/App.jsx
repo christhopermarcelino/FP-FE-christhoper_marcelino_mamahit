@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Movie from "./pages/Movie";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -41,7 +42,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-          target="_blank"
+            <Route path="/movie/:id" element={<Movie />} />
           rel="noopener noreferrer"
           </Routes>
         </BrowserRouter>
