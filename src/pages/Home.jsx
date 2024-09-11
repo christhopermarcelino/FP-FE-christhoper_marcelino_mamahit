@@ -4,7 +4,7 @@ import MovieCard from "../components/MovieCard";
 export default function Home() {
   return (
     <>
-      <h1 className="mb-4 fw-semibold">Trending NOW</h1>
+      <h1 className="mb-4 fw-semibold">Trending today</h1>
 
       {data?.Search?.length == 0 ? (
         <p className="text-center">No movies found.</p>
