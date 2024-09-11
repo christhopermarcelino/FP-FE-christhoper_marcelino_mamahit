@@ -38,7 +38,7 @@ function App() {
         onInputChange={handleSearchOnChange}
         onSearchSubmit={handleSearchButtonOnSubmit}
       />
-      <main className="container py-4 min-vh-100">
+      <main className="container py-5 min-vh-100">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
