@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -36,13 +38,13 @@ function App() {
         onSearchSubmit={handleSearchButtonOnSubmit}
       />
       <main className="container py-4 min-vh-100">
-        <a
-          className="App-link"
-          href="https://reactjs.org"
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
           target="_blank"
           rel="noopener noreferrer"
-        >
-          Learn React
+          </Routes>
+        </BrowserRouter>
       </main>
       <Footer />
     </div>
