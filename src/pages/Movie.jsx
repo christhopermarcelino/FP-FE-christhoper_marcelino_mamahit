@@ -104,11 +104,20 @@ export default function Movie() {
       </div>
       <div className="row mt-4 row-gap-2">
         <h3 className="fs-4">Ratings</h3>
+        <div className="col-sm-6 col-md-4 col-lg-3 px-2">
+          <div className="border rounded py-3 px-4">
+            <div className="d-flex align-items-center gap-2">
+              <MdOutlineStar className="text-warning" />
+              <span>{movie.imdbRating}</span>
+            </div>
+            <p className="mb-0">IMDb</p>
+          </div>
+        </div>
         {movie.Ratings.map((rating) => (
           <div key={rating.Source} className="col-sm-6 col-md-4 col-lg-3 px-2">
             <div className="border rounded py-3 px-4">
               <div className="d-flex align-items-center gap-2">
-                <MdOutlineStar />
+                <MdOutlineStar className="text-warning" />
                 <span>{rating.Value}</span>
               </div>
               <p className="mb-0">{rating.Source}</p>
