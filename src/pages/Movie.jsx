@@ -58,7 +58,11 @@ export default function Movie() {
           <div className="row placeholder-glow">
             <div className="col-6 col-lg-3 mx-auto mb-3 mb-lg-0">
               <img
-                src={movie?.Poster}
+                src={
+                  isValueExists(movie?.Poster)
+                    ? movie?.Poster
+                    : "/assets/images/no-picture.png"
+                }
                 alt={movie?.Title}
                 className="img-fluid"
               />
