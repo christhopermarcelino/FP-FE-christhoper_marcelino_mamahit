@@ -1,0 +1,7 @@
+div.loading-container {
+  min-height: 20rem;
+}
+
+div.loading-full-screen {
+  min-height: 80vh;
+}

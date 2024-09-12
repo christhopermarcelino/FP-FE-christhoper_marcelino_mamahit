@@ -2,7 +2,7 @@ import { createStore } from "redux";
 import { ACTION_TYPE } from "./action";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   search: "",
   movies: {},
 };
