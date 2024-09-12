@@ -1,26 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../SearchBar";
-import { changeSearch, changeMovies } from "../../store/action";
+import { changeSearch, changeMovies, changeLoading } from "../../store/action";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+const DEFAULT_MOVIE_NAME = "harry%20potter";
 
 export default function Navbar({ onInputChange, onSearchSubmit }) {
+  const [searchName, setSearchName] = useState("");
   const search = useSelector((state) => state.search);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSearchOnChange = (e) => {
-    dispatch(changeSearch(e.target.value));
+    setSearchName(e.target.value);
   };
 
   const getMoviedata = async (e) => {
     e.preventDefault();
     try {
+      const movieName = search || DEFAULT_MOVIE_NAME;
+      dispatch(changeLoading(true));
       const data = await fetch(
-        `${process.env.REACT_APP_BASE_URL}?apiKey=${process.env.REACT_APP_API_KEY}&s=${search}&page=1`
+        `${process.env.REACT_APP_BASE_URL}?apiKey=${process.env.REACT_APP_API_KEY}&s=${movieName}&page=1`
       );
       const jsonData = await data.json();
-      navigate("/");
+      dispatch(changeSearch(searchName));
       dispatch(changeMovies(jsonData));
+      dispatch(changeLoading(false));
+      navigate("/");
     } catch (err) {
       // show error toast
     }
@@ -35,7 +43,7 @@ export default function Navbar({ onInputChange, onSearchSubmit }) {
 
         <div className="d-flex gap-2">
           <SearchBar
-            value={search}
+            value={searchName}
             onInputChange={handleSearchOnChange}
             onSearchSubmit={getMoviedata}
           />
