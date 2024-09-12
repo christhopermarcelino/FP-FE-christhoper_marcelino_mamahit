@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MdOutlineStar } from "react-icons/md";
 import { FaMedal } from "react-icons/fa6";
@@ -26,7 +26,7 @@ export default function Movie() {
 
   useEffect(() => {
     getMoviedata();
-  }, []);
+  }, [imdbID]);
 
   const getMoviedata = async () => {
     try {
@@ -154,9 +154,10 @@ export default function Movie() {
             <div className="row mt-5 row-gap-2">
               <h3 className="fs-4">Recommended for you</h3>
               {(movies?.Search ?? []).map((movie, index) => {
-                if (index < 5) {
+                if (index < 6) {
                   return (
-                    <div
+                    <Link
+                      to={`/movie/${movie.imdbID}`}
                       key={movie.imdbID}
                       className="col-6 col-sm-4 col-md-3 col-xl-2"
                     >
@@ -166,7 +167,7 @@ export default function Movie() {
                         year={movie.Year}
                         href={`/movie/${movie.imdbID}`}
                       />
-                    </div>
+                    </Link>
                   );
                 }
               })}
