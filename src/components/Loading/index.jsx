@@ -7,8 +7,8 @@ export default function Loading({ isFullScreen = true }) {
         isFullScreen ? "loading-full-screen" : "loading-container"
       }`}
     >
-      <div class="spinner-border" role="status"></div>
-      <span class="sr-only visually-visible">Loading...</span>
+      <div className="spinner-border" role="status"></div>
+      <span className="sr-only visually-visible">Loading...</span>
     </div>
   );
 }
