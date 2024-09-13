@@ -1,8 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import SearchBar from "../SearchBar";
-import { changeSearch, changeMovies, changeLoading } from "../../store/action";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import SearchBar from "src/components/SearchBar";
+import { changeSearch, changeMovies, changeLoading } from "src/store/action";
 
 const DEFAULT_MOVIE_NAME = "harry%20potter";
 

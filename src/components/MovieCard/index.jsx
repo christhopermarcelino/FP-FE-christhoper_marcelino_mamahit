@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { isValueExists } from "../../libs/helper";
+
 import "./index.css";
+import { isValueExists } from "src/libs/helper";
 
 export default function MovieCard({ poster, title, year, href, className }) {
   return (

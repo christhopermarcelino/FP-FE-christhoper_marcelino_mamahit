@@ -1,6 +1,7 @@
-import "./index.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import "./index.css";
 
 export default function Pagination({ movies, page }) {
   const [maxPage, setMaxPage] = useState(1);

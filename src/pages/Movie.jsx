@@ -1,12 +1,13 @@
-import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineStar } from "react-icons/md";
 import { FaMedal } from "react-icons/fa6";
-import { useDispatch, useSelector } from "react-redux";
-import { isValueExists } from "../libs/helper";
-import MovieCard from "../components/MovieCard";
-import { changeLoading } from "../store/action";
-import Loading from "../components/Loading";
+
+import { isValueExists } from "src/libs/helper";
+import MovieCard from "src/components/MovieCard";
+import { changeLoading } from "src/store/action";
+import Loading from "src/components/Loading";
 
 const MOVIE_DETAIL_KEYS = [
   "Genre",

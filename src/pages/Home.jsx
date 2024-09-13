@@ -1,10 +1,11 @@
-import MovieCard from "../components/MovieCard";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { changeLoading, changeMovies } from "../store/action";
-import Loading from "../components/Loading";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import Pagination from "../components/Pagination";
+
+import { changeLoading, changeMovies } from "src/store/action";
+import MovieCard from "src/components/MovieCard";
+import Loading from "src/components/Loading";
+import Pagination from "src/components/Pagination";
 
 const DEFAULT_MOVIE_NAME = "harry%20potter";
 
