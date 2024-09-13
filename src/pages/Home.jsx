@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import { changeLoadingAsync, changeMoviesAsync } from "src/store/action";
 import MovieCard from "src/components/MovieCard";
 import Loading from "src/components/Loading";
 import Pagination from "src/components/Pagination";
+import Error from "src/components/Error";
 
 const DEFAULT_MOVIE_NAME = "harry%20potter";
 
@@ -59,17 +60,7 @@ export default function Home() {
           <Pagination movies={movies} page={page} />
         </>
       ) : (
-        <div className="row">
-          <div className="col-4 col-sm-4 col-md-4 col-lg-3 m-auto mb-4">
-            <img
-              src="/assets/images/error.png"
-              alt="Error"
-              className="img-fluid"
-            />
-          </div>
-          <p className="text-center fs-5 mb-0">{movies.Error}</p>
-          <p className="text-center">Please try again your search</p>
-        </div>
+        <Error text={movies.Error} />
       )}
     </>
   );

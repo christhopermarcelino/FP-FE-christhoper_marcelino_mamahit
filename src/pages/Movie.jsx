@@ -8,6 +8,7 @@ import { changeLoadingAsync } from "src/store/action";
 import { isValueExists } from "src/libs/helper";
 import MovieCard from "src/components/MovieCard";
 import Loading from "src/components/Loading";
+import Error from "src/components/Error";
 
 const MOVIE_DETAIL_KEYS = [
   "Genre",
@@ -49,6 +50,10 @@ export default function Movie() {
     }
     return items.split(",").join(" · ");
   };
+
+  if (movie?.Response === "False") {
+    return <Error text={movie.Error} />;
+  }
 
   return (
     <>
