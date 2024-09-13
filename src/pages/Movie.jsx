@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineStar } from "react-icons/md";
 import { FaMedal } from "react-icons/fa6";
 
+import { changeLoadingAsync } from "src/store/action";
 import { isValueExists } from "src/libs/helper";
 import MovieCard from "src/components/MovieCard";
-import { changeLoading } from "src/store/action";
 import Loading from "src/components/Loading";
 
 const MOVIE_DETAIL_KEYS = [
@@ -31,13 +31,13 @@ export default function Movie() {
 
   const getMoviedata = async () => {
     try {
-      dispatch(changeLoading(true));
+      dispatch(changeLoadingAsync(true));
       const data = await fetch(
         `${process.env.REACT_APP_BASE_URL}?apiKey=${process.env.REACT_APP_API_KEY}&i=${imdbID}&plot=full`
       );
       const jsonData = await data.json();
       setMovie(jsonData);
-      dispatch(changeLoading(false));
+      dispatch(changeLoadingAsync(false));
     } catch (err) {
       // show error toast
     }
@@ -157,8 +157,7 @@ export default function Movie() {
               {(movies?.Search ?? []).map((movie, index) => {
                 if (index < 6) {
                   return (
-                    <Link
-                      to={`/movie/${movie.imdbID}`}
+                    <div
                       key={movie.imdbID}
                       className="col-6 col-sm-4 col-md-3 col-xl-2"
                     >
@@ -168,7 +167,7 @@ export default function Movie() {
                         year={movie.Year}
                         href={`/movie/${movie.imdbID}`}
                       />
-                    </Link>
+                    </div>
                   );
                 }
               })}

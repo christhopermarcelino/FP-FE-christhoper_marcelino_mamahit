@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
-import { changeLoading, changeMovies } from "src/store/action";
+import { changeLoadingAsync, changeMoviesAsync } from "src/store/action";
 import MovieCard from "src/components/MovieCard";
 import Loading from "src/components/Loading";
 import Pagination from "src/components/Pagination";
@@ -21,13 +21,13 @@ export default function Home() {
 
   const getMovieData = async ({ name, page }) => {
     try {
-      dispatch(changeLoading(true));
+      dispatch(changeLoadingAsync(true));
       const data = await fetch(
         `${process.env.REACT_APP_BASE_URL}?apiKey=${process.env.REACT_APP_API_KEY}&s=${name}&page=${page}`
       );
       const jsonData = await data.json();
-      dispatch(changeMovies(jsonData));
-      dispatch(changeLoading(false));
+      dispatch(changeMoviesAsync(jsonData));
+      dispatch(changeLoadingAsync(false));
     } catch (err) {
       // show error toast
     }

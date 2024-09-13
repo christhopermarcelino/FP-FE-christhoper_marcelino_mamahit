@@ -4,23 +4,41 @@ export const ACTION_TYPE = {
   CHANGE_SEARCH: "CHANGE_SEARCH",
 };
 
-export const changeLoading = (payload) => {
+const changeLoading = (payload) => {
   return {
     type: ACTION_TYPE.CHANGE_LOADING,
     payload: payload,
   };
 };
 
-export const changeSearch = (payload) => {
+const changeSearch = (payload) => {
   return {
     type: ACTION_TYPE.CHANGE_SEARCH,
     payload: payload,
   };
 };
 
-export const changeMovies = (payload) => {
+const changeMovies = (payload) => {
   return {
     type: ACTION_TYPE.CHANGE_MOVIES,
     payload: payload,
+  };
+};
+
+export const changeLoadingAsync = (payload) => {
+  return async (dispatch) => {
+    dispatch(changeLoading(payload));
+  };
+};
+
+export const changeSearchAsync = (payload) => {
+  return async (dispatch) => {
+    dispatch(changeSearch(payload));
+  };
+};
+
+export const changeMoviesAsync = (payload) => {
+  return async (dispatch) => {
+    dispatch(changeMovies(payload));
   };
 };

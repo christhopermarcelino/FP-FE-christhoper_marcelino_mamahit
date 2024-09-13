@@ -1,5 +1,7 @@
-import { createStore } from "redux";
-import { ACTION_TYPE } from "./action";
+import { applyMiddleware, createStore } from "redux";
+import { thunk } from "redux-thunk";
+
+import { ACTION_TYPE } from "src/store/action";
 
 const initialState = {
   isLoading: false,
@@ -20,6 +22,6 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
