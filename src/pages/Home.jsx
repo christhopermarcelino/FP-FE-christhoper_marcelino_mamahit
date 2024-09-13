@@ -15,6 +15,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const page = searchParams.get("page") ?? 1;
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     getMovieData({ name: search || DEFAULT_MOVIE_NAME, page });
@@ -30,9 +31,13 @@ export default function Home() {
       dispatch(changeMoviesAsync(jsonData));
       dispatch(changeLoadingAsync(false));
     } catch (err) {
-      // show error toast
+      setIsError(true);
     }
   };
+
+  if (isError) {
+    return <Error text="Unable to retrieve data" />;
+  }
 
   if (isLoading) {
     return <Loading isFullScreen={false} />;

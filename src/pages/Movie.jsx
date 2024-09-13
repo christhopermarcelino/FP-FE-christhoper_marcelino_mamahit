@@ -24,6 +24,7 @@ export default function Movie() {
   const { imdbID } = useParams();
   const isLoading = useSelector((state) => state.isLoading);
   const movies = useSelector((state) => state.movies);
+  const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export default function Movie() {
       setMovie(jsonData);
       dispatch(changeLoadingAsync(false));
     } catch (err) {
-      // show error toast
+      setIsError(true);
     }
   };
 
@@ -50,6 +51,10 @@ export default function Movie() {
     }
     return items.split(",").join(" · ");
   };
+
+  if (isError) {
+    return <Error text="Unable to retrieve data" />;
+  }
 
   if (movie?.Response === "False") {
     return <Error text={movie.Error} />;
