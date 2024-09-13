@@ -44,7 +44,7 @@ export default function Home() {
           <h1 className="mb-4 fw-semibold fs-3">
             {search ? `Search for: ${search}` : "Trending today"}
           </h1>
-          <div className="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-gap-3 mb-4">
+          <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-gap-3 mb-4">
             {(movies?.Search ?? []).map((d) => (
               <div key={d.imdbID}>
                 <MovieCard
