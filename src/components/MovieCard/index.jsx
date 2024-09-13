@@ -15,6 +15,10 @@ export default function MovieCard({ poster, title, year, href, className }) {
           src={isValueExists(poster) ? poster : "/assets/images/no-picture.png"}
           alt={title}
           className="w-100 h-100"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "/assets/images/no-picture.png";
+          }}
         />
       </div>
       <div className="overlay w-100 h-100 position-absolute start-0 end-0 top-0 bottom-0 bg-black"></div>

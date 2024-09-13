@@ -66,6 +66,10 @@ export default function Movie() {
                 }
                 alt={movie?.Title}
                 className="img-fluid"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/assets/images/no-picture.png";
+                }}
               />
             </div>
             <div className="col-lg-9">
