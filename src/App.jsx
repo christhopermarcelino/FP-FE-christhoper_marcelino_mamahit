@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/movie/:imdbID" element={<Movie />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
