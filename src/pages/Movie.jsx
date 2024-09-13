@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineStar } from "react-icons/md";
 import { FaMedal } from "react-icons/fa6";
 
-import { changeLoadingAsync } from "src/store/action";
+import { changeError, changeLoading } from "src/store/action";
 import { isValueExists } from "src/libs/helper";
 import MovieCard from "src/components/MovieCard";
 import Loading from "src/components/Loading";
@@ -23,8 +23,7 @@ export default function Movie() {
   const [movie, setMovie] = useState({});
   const { imdbID } = useParams();
   const isLoading = useSelector((state) => state.isLoading);
-  const movies = useSelector((state) => state.movies);
-  const [isError, setIsError] = useState(false);
+  const { movies, isError } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,15 +32,16 @@ export default function Movie() {
 
   const getMoviedata = async () => {
     try {
-      dispatch(changeLoadingAsync(true));
+      dispatch(changeLoading(true));
       const data = await fetch(
         `${process.env.REACT_APP_BASE_URL}?apiKey=${process.env.REACT_APP_API_KEY}&i=${imdbID}&plot=full`
       );
       const jsonData = await data.json();
       setMovie(jsonData);
-      dispatch(changeLoadingAsync(false));
+      dispatch(changeError(false));
+      dispatch(changeLoading(false));
     } catch (err) {
-      setIsError(true);
+      dispatch(changeError(true));
     }
   };
 

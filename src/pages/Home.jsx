@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
-import { changeLoadingAsync, changeMoviesAsync } from "src/store/action";
 import MovieCard from "src/components/MovieCard";
 import Loading from "src/components/Loading";
 import Pagination from "src/components/Pagination";
 import Error from "src/components/Error";
+import { changeError, changeLoading, changeMovies } from "src/store/action";
 
 const DEFAULT_MOVIE_NAME = "harry%20potter";
 
 export default function Home() {
-  const { movies, isLoading, search } = useSelector((state) => state);
+  const { movies, isLoading, isError, search } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const page = searchParams.get("page") ?? 1;
-  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     getMovieData({ name: search || DEFAULT_MOVIE_NAME, page });
@@ -23,15 +22,16 @@ export default function Home() {
 
   const getMovieData = async ({ name, page }) => {
     try {
-      dispatch(changeLoadingAsync(true));
+      dispatch(changeLoading(true));
       const data = await fetch(
         `${process.env.REACT_APP_BASE_URL}?apiKey=${process.env.REACT_APP_API_KEY}&s=${name}&page=${page}`
       );
       const jsonData = await data.json();
-      dispatch(changeMoviesAsync(jsonData));
-      dispatch(changeLoadingAsync(false));
+      dispatch(changeMovies(jsonData));
+      dispatch(changeError(false));
+      dispatch(changeLoading(false));
     } catch (err) {
-      setIsError(true);
+      dispatch(changeError(true));
     }
   };
 

@@ -2,18 +2,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  changeLoadingAsync,
-  changeMoviesAsync,
-  changeSearchAsync,
-} from "src/store/action";
 import SearchBar from "src/components/SearchBar";
+import {
+  changeError,
+  changeLoading,
+  changeMovies,
+  changeSearch,
+} from "src/store/action";
 
 const DEFAULT_MOVIE_NAME = "harry%20potter";
 
 export default function Navbar() {
   const [searchName, setSearchName] = useState("");
-  const search = useSelector((state) => state.search);
+  const { search } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,17 +26,18 @@ export default function Navbar() {
     e.preventDefault();
     try {
       const movieName = search || DEFAULT_MOVIE_NAME;
-      dispatch(changeLoadingAsync(true));
+      dispatch(changeLoading(true));
       const data = await fetch(
         `${process.env.REACT_APP_BASE_URL}?apiKey=${process.env.REACT_APP_API_KEY}&s=${movieName}&page=1`
       );
       const jsonData = await data.json();
-      dispatch(changeSearchAsync(searchName));
-      dispatch(changeMoviesAsync(jsonData));
-      dispatch(changeLoadingAsync(false));
+      dispatch(changeSearch(searchName));
+      dispatch(changeMovies(jsonData));
+      dispatch(changeError(false));
+      dispatch(changeLoading(false));
       navigate("/");
     } catch (err) {
-      // show error toast
+      dispatch(changeError(true));
     }
   };
 

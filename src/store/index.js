@@ -4,6 +4,7 @@ import { thunk } from "redux-thunk";
 import { ACTION_TYPE } from "src/store/action";
 
 const initialState = {
+  isError: false,
   isLoading: false,
   search: "",
   movies: {},
@@ -11,6 +12,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTION_TYPE.CHANGE_ERROR:
+      return { ...state, isError: action.payload };
     case ACTION_TYPE.CHANGE_LOADING:
       return { ...state, isLoading: action.payload };
     case ACTION_TYPE.CHANGE_SEARCH:
